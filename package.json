@@ -1,0 +1,26 @@
+{
+  "name": "ssafy-homework-form",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sw0501/SSAFY-Homework-Form.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sw0501/SSAFY-Homework-Form/issues"
+  },
+  "homepage": "https://github.com/sw0501/SSAFY-Homework-Form#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cheerio-httpcli": "^0.8.3",
+    "express": "^4.18.2",
+    "request": "^2.88.2"
+  }
+}
