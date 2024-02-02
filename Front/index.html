@@ -193,17 +193,12 @@
   }
 
   function send(f) {
-    var baekId = f.baekId.value;
-    console.log(f.baekId.value);
-
-    // WARNING: For GET requests, body is set to null by browsers.
 
     var xhr = new XMLHttpRequest();
     xhr.withCredentials = true;
 
     xhr.addEventListener("readystatechange", function () {
       if (this.readyState === 4) {
-        console.log(this.responseText);
         const message = JSON.parse(this.responseText).form;
 
         document.getElementById("myInput").innerHTML = message;
@@ -216,8 +211,6 @@
     queryString += "&idea1=" + f.idea1.value;
     queryString += "&idea2=" + f.idea2.value;
     queryString += "&idea3=" + f.idea3.value;
-
-    console.log(url);
 
     xhr.open("GET", url + queryString);
 

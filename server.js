@@ -13,29 +13,15 @@ app.get("/", (req, res) => {
     return res.status(200).json({
         success: true,
     });
-    //res.sendFile(__dirname + "/Front/index.html");
 });
 
 app.get("/search", async (req, res) => {
     res.header("Access-Control-Allow-Origin", "null");
     const userId = req.query.userId;
     const problemId = req.query.problemId;
-    const ideaList = [];
-
-    console.log(userId);
-    console.log(problemId);
-
-    if (req.query.idea1 !== "") {
-        ideaList.push(req.query.idea1);
-    }
-    if (req.query.idea1 !== "") {
-        ideaList.push(req.query.idea2);
-    }
-    if (req.query.idea1 !== "") {
-        ideaList.push(req.query.idea3);
-    }
-
-    console.log(ideaList);
+    const idea1 = req.query.idea1;
+    const idea2 = req.query.idea2;
+    const idea3 = req.query.idea3;
 
     let message = "";
 
@@ -52,7 +38,7 @@ app.get("/search", async (req, res) => {
                 },
                 function (error, response, body) {
                     const probelmInfo = JSON.parse(body);
-                    message += "BOJ " + probelmInfo.problemId + " " + probelmInfo.titleKo + "<br>";
+                    message += "###BOJ " + probelmInfo.problemId + " " + probelmInfo.titleKo + "<br>";
                     message += "태그 : ";
 
                     for (let i = 0; i < probelmInfo.tags.length; i++) {
@@ -102,14 +88,17 @@ app.get("/search", async (req, res) => {
             const memory = $("#status-table > tbody > tr:first-child > .memory").text();
             const time = $("#status-table > tbody > tr:first-child > .time").text();
 
-            message += "메모리: ```" + memory + "kb```<br>";
-            message += "실행 시간: ```" + time + "ms```<br>";
+            message += "메모리: ```" + Number.parseInt(memory).toLocaleString("ko-KR") + "kb```<br>";
+            message += "실행 시간: ```" + Number.parseInt(time).toLocaleString("ko-KR") + "ms```<br>";
 
-            for (let i = 0; i < ideaList.length; i++) {
-                message += "- " + ideaList[i];
-                if (i != ideaList.length - 1) {
-                    message += "<br>";
-                }
+            if (idea1 !== "") {
+                message += "- " + idea1 + "<br>";
+            }
+            if (idea2 !== "") {
+                message += "- " + idea2 + "<br>";
+            }
+            if (idea3 !== "") {
+                message += "- " + idea3 + "<br>";
             }
         });
     });
@@ -118,7 +107,7 @@ app.get("/search", async (req, res) => {
         return res.status(200).json({
             form: message,
         });
-    }, 1000);
+    }, 500);
 });
 
 app.listen(port, () => {
