@@ -16,7 +16,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/search", async (req, res) => {
-    res.header("Access-Control-Allow-Origin", "null");
+    res.header("Access-Control-Allow-Origin", "*");
     const userId = req.query.userId;
     const problemId = req.query.problemId;
     const idea1 = req.query.idea1;
