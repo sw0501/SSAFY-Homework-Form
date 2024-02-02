@@ -20,31 +20,44 @@ app.post("/search", async (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     const userId = req.body.userId;
     const problemId = req.body.problemId;
+    const ideaList = (req.body.ideaList === undefined ? [] : req.body.ideaList);
 
-    /*
-  //문제 태그 정보 가져오기
-  const solvedUrl = "https://solved.ac/api/v3/problem/show";
-  let queryParams = "?" + encodeURIComponent("problemId") + "=" + problemId;
+    let message = "";
 
-  const tag = [];
+    function getProblemInfo() {
+        return new Promise((res, rej) => {
+            //문제 태그 정보 가져오기
+            const solvedUrl = "https://solved.ac/api/v3/problem/show";
+            let queryParams = "?" + encodeURIComponent("problemId") + "=" + problemId;
 
-  request(
-    {
-      url: solvedUrl + queryParams,
-      method: "GET",
-    },
-    function (error, response, body) {
-      console.log(JSON.parse(body));
-      return res.status(200).json({
-        body: JSON.parse(body),
-      });
+            request(
+                {
+                url: solvedUrl + queryParams,
+                    method: "GET",
+                },
+                function (error, response, body) {
+                    const probelmInfo = JSON.parse(body);
+                    message += "BOJ " + probelmInfo.problemId + " " + probelmInfo.titleKo + "\n";
+                    message += "태그 : "
+
+                    for (let i = 0; i < probelmInfo.tags.length; i++){
+                        message += probelmInfo.tags[i].displayNames[0].name;
+                        if (i != probelmInfo.tags.length-1) {
+                            message += ", ";
+                        }
+                        else {
+                            message += "\n";
+                        }
+                    }
+
+                    res();
+                }
+            );
+        })
     }
-  );
-  */
 
     function careerRefresh() {
         return new Promise((res, rej) => {
-            setTimeout(() => {
                 //사용자 해결 여부 가져오기
                 const userUrl = "https://acmicpc.net/status";
                 queryParams = "?" + encodeURIComponent("problem_id") + "=" + problemId;
@@ -59,14 +72,12 @@ app.post("/search", async (req, res) => {
                 });
 
                 res(userUrl + queryParams);
-            }, 500);
         });
     }
 
-    await careerRefresh().then((url) => {
-        let memory;
-        let time;
+    await getProblemInfo();
 
+    await careerRefresh().then((url) => {
         const param = {};
         client.fetch(url, param, function (err, $, res) {
             if (err) {
@@ -77,14 +88,23 @@ app.post("/search", async (req, res) => {
             const memory = $("#status-table > tbody > tr:first-child > .memory").text();
             const time = $("#status-table > tbody > tr:first-child > .time").text();
 
-            let message = "메모리: ```" + memory + "kb```\n";
+            message += "메모리: ```" + memory + "kb```\n";
             message += "실행 시간: ```" + time + "ms```\n";
 
-            //반복문으로 태그
-            console.log(message);
-            //return res.status(200).json($.text());
-        });
+            for (let i = 0; i < ideaList.length; i++){
+                message += "- " + ideaList[i];
+                if (i != ideaList.length - 1) {
+                    message += "\n";
+                }
+            }
+        })
     });
+    
+    setTimeout(() => {
+        return res.status(200).json({
+            form: message
+        })
+    },500);
 });
 
 app.listen(port, () => {
