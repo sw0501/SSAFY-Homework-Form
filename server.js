@@ -17,20 +17,26 @@ app.get("/", (req, res) => {
 });
 
 app.get("/search", async (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    const userId = req.params.userId;
-    const problemId = req.params.problemId;
+    res.header("Access-Control-Allow-Origin", "null");
+    const userId = req.query.userId;
+    const problemId = req.query.problemId;
     const ideaList = [];
 
-    if (req.params.idea1 !== "") {
-        ideaList.push(req.params.idea1);
+    console.log(userId);
+    console.log(problemId);
+
+
+    if (req.query.idea1 !== "") {
+        ideaList.push(req.query.idea1);
     }
-    if (req.params.idea1 !== "") {
-        ideaList.push(req.params.idea2);
+    if (req.query.idea1 !== "") {
+        ideaList.push(req.query.idea2);
     }
-    if (req.params.idea1 !== "") {
-        ideaList.push(req.params.idea3);
+    if (req.query.idea1 !== "") {
+        ideaList.push(req.query.idea3);
     }
+
+    console.log(ideaList);
 
     let message = "";
 
@@ -47,7 +53,7 @@ app.get("/search", async (req, res) => {
                 },
                 function (error, response, body) {
                     const probelmInfo = JSON.parse(body);
-                    message += "BOJ " + probelmInfo.problemId + " " + probelmInfo.titleKo + "\\n";
+                    message += "BOJ " + probelmInfo.problemId + " " + probelmInfo.titleKo + "<br>";
                     message += "태그 : "
 
                     for (let i = 0; i < probelmInfo.tags.length; i++){
@@ -56,7 +62,7 @@ app.get("/search", async (req, res) => {
                             message += ", ";
                         }
                         else {
-                            message += "\\n";
+                            message += "<br>";
                         }
                     }
 
@@ -98,13 +104,13 @@ app.get("/search", async (req, res) => {
             const memory = $("#status-table > tbody > tr:first-child > .memory").text();
             const time = $("#status-table > tbody > tr:first-child > .time").text();
 
-            message += "메모리: ```" + memory + "kb```\\n";
-            message += "실행 시간: ```" + time + "ms```\\n";
+            message += "메모리: ```" + memory + "kb```<br>";
+            message += "실행 시간: ```" + time + "ms```<br>";
 
             for (let i = 0; i < ideaList.length; i++){
                 message += "- " + ideaList[i];
                 if (i != ideaList.length - 1) {
-                    message += "\\n";
+                    message += "<br>";
                 }
             }
         })
