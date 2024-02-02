@@ -35,8 +35,24 @@
       }
 
       .main .form label {
-        font-size: 1.5rem;
+        color: #5c5c5c;
+        font-size: 1.1rem;
         font-weight: 500;
+      }
+
+      .btnBlueGreen {
+        font-size: 1.2rem;
+        color: #fff;
+        background: #00ae68;
+        border: 1px solid #fff;
+      }
+
+      .btnBlueGreen:hover {
+        background: #21825b;
+      }
+
+      .inputBoder {
+        border: 1px solid #ccc;
       }
 
       .main .form input {
@@ -45,7 +61,7 @@
         padding: 12px 20px;
         margin: 8px 0 20px 0;
         display: inline-block;
-        border: 1px solid #ccc;
+        /* border: 1px solid #ccc; */
         border-radius: 4px;
         box-sizing: border-box;
       }
@@ -94,19 +110,38 @@
     <main class="main">
       <form action="" class="form">
         <label for="baekId">BaekJoon ID</label>
-        <input type="text" id="baekId" name="beakId" placeholder="userId" size="30" />
+        <input
+          type="text"
+          id="baekId"
+          name="baekId"
+          placeholder="userId"
+          size="30"
+          class="inputBoder"
+        />
 
         <label for="baekNum">BaekJoon Solved Number</label>
-        <input type="text" id="baekNum" name="baekNum" placeholder="1234" size="30" />
+        <input
+          type="text"
+          id="baekNum"
+          name="baekNum"
+          placeholder="1234"
+          size="30"
+          class="inputBoder"
+        />
 
         <label for="idea1">Idea 1</label>
-        <input type="text" id="idea1" name="idea1" />
+        <input type="text" id="idea1" name="idea1" class="inputBoder" />
         <label for="idea2">Idea 2</label>
-        <input type="text" id="idea2" name="idea2" />
+        <input type="text" id="idea2" name="idea2" class="inputBoder" />
         <label for="idea3">Idea 3</label>
-        <input type="text" id="idea3" name="idea3" />
+        <input type="text" id="idea3" name="idea3" class="inputBoder" />
 
-        <input type="submit" value="Ready To Get BaekJoon" />
+        <input
+          type="button"
+          onclick="send(this.form)"
+          value="Ready To Get BaekJoon"
+          class="btnBlueGreen"
+        />
       </form>
       <hr />
       <div class="result">
@@ -140,5 +175,10 @@
       .catch((err) => {
         console.error("copy failed");
       });
+  }
+
+  function send(f) {
+    var baekId = f.baekId.value;
+    console.log(f.baekId.value);
   }
 </script>
