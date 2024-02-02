@@ -58,7 +58,6 @@ app.post("/search", async (req, res) => {
                     "Accept-Charset": "utf-8",
                 });
 
-                console.log(userUrl + queryParams);
                 res(userUrl + queryParams);
             }, 500);
         });
@@ -75,15 +74,14 @@ app.post("/search", async (req, res) => {
                 return;
             }
 
-            const activate = [];
-            const memory = $(this).find("#status-table > tbody > :nth-last-child(1) > .memory").text();
-            const time = $(this).find("#status-table > tbody > :nth-last-child(1) > .time").text();
+            const memory = $("#status-table > tbody > tr:first-child > .memory").text();
+            const time = $("#status-table > tbody > tr:first-child > .time").text();
 
             let message = "메모리: ```" + memory + "kb```\n";
             message += "실행 시간: ```" + time + "ms```\n";
 
             //반복문으로 태그
-            console.log($.html());
+            console.log(message);
             //return res.status(200).json($.text());
         });
     });
