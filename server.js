@@ -16,11 +16,21 @@ app.get("/", (req, res) => {
     //res.sendFile(__dirname + "/Front/index.html");
 });
 
-app.post("/search", async (req, res) => {
+app.get("/search", async (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
-    const userId = req.body.userId;
-    const problemId = req.body.problemId;
-    const ideaList = (req.body.ideaList === undefined ? [] : req.body.ideaList);
+    const userId = req.params.userId;
+    const problemId = req.params.problemId;
+    const ideaList = [];
+
+    if (req.params.idea1 !== "") {
+        ideaList.push(req.params.idea1);
+    }
+    if (req.params.idea1 !== "") {
+        ideaList.push(req.params.idea2);
+    }
+    if (req.params.idea1 !== "") {
+        ideaList.push(req.params.idea3);
+    }
 
     let message = "";
 
@@ -37,7 +47,7 @@ app.post("/search", async (req, res) => {
                 },
                 function (error, response, body) {
                     const probelmInfo = JSON.parse(body);
-                    message += "BOJ " + probelmInfo.problemId + " " + probelmInfo.titleKo + "\n";
+                    message += "BOJ " + probelmInfo.problemId + " " + probelmInfo.titleKo + "\\n";
                     message += "태그 : "
 
                     for (let i = 0; i < probelmInfo.tags.length; i++){
@@ -46,7 +56,7 @@ app.post("/search", async (req, res) => {
                             message += ", ";
                         }
                         else {
-                            message += "\n";
+                            message += "\\n";
                         }
                     }
 
@@ -88,13 +98,13 @@ app.post("/search", async (req, res) => {
             const memory = $("#status-table > tbody > tr:first-child > .memory").text();
             const time = $("#status-table > tbody > tr:first-child > .time").text();
 
-            message += "메모리: ```" + memory + "kb```\n";
-            message += "실행 시간: ```" + time + "ms```\n";
+            message += "메모리: ```" + memory + "kb```\\n";
+            message += "실행 시간: ```" + time + "ms```\\n";
 
             for (let i = 0; i < ideaList.length; i++){
                 message += "- " + ideaList[i];
                 if (i != ideaList.length - 1) {
-                    message += "\n";
+                    message += "\\n";
                 }
             }
         })
