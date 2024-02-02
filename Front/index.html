@@ -8,6 +8,7 @@
       body {
         margin-left: 20%;
         margin-right: 20%;
+        background-color: #f9f9f9;
       }
 
       header .title {
@@ -45,6 +46,7 @@
         color: #fff;
         background: #00ae68;
         border: 1px solid #fff;
+        margin-bottom: 30px;
       }
 
       .btnBlueGreen:hover {
@@ -68,7 +70,12 @@
 
       .main .result .result_box .copy {
         float: right;
-        width: 100px;
+        width: 65px;
+        background-color: #5c5c5c;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        padding: 5px;
       }
 
       .main .result .result_sub {
@@ -97,69 +104,77 @@
       footer {
         height: 100px;
       }
+
+      hr {
+        background: #f9f9f9;
+        height: 1px;
+        border: 0;
+      }
     </style>
   </head>
 
   <body>
-    <header>
-      <div class="title">SSAFY 11th <br />Homework Form Creator</div>
-    </header>
+    <div style="background-color: #fff; top: -10px">
+      <header>
+        <div class="title">SSAFY 11th <br />Homework Form Creator</div>
+      </header>
 
-    <hr />
-
-    <main class="main">
-      <form action="" class="form">
-        <label for="baekId">BaekJoon ID</label>
-        <input
-          type="text"
-          id="baekId"
-          name="baekId"
-          placeholder="userId"
-          size="30"
-          class="inputBoder"
-        />
-
-        <label for="baekNum">BaekJoon Solved Number</label>
-        <input
-          type="text"
-          id="baekNum"
-          name="baekNum"
-          placeholder="1234"
-          size="30"
-          class="inputBoder"
-        />
-
-        <label for="idea1">Idea 1</label>
-        <input type="text" id="idea1" name="idea1" class="inputBoder" />
-        <label for="idea2">Idea 2</label>
-        <input type="text" id="idea2" name="idea2" class="inputBoder" />
-        <label for="idea3">Idea 3</label>
-        <input type="text" id="idea3" name="idea3" class="inputBoder" />
-
-        <input
-          type="button"
-          onclick="send(this.form)"
-          value="Ready To Get BaekJoon"
-          class="btnBlueGreen"
-        />
-      </form>
       <hr />
-      <div class="result">
-        <div class="result_sub">RESULT</div>
-        <div class="result_box">
-          <button onclick="copy_to_clipboard()" class="copy">
-            COPY
-            <!-- <img
+
+      <main class="main">
+        <form action="" class="form">
+          <label for="baekId">BaekJoon ID</label>
+          <input
+            type="text"
+            id="baekId"
+            name="baekId"
+            placeholder="userId"
+            size="30"
+            class="inputBoder"
+          />
+
+          <label for="baekNum">BaekJoon Solved Number</label>
+          <input
+            type="text"
+            id="baekNum"
+            name="baekNum"
+            placeholder="1234"
+            size="30"
+            class="inputBoder"
+          />
+
+          <label for="idea1">Idea 1</label>
+          <input type="text" id="idea1" name="idea1" class="inputBoder" />
+          <label for="idea2">Idea 2</label>
+          <input type="text" id="idea2" name="idea2" class="inputBoder" />
+          <label for="idea3">Idea 3</label>
+          <input type="text" id="idea3" name="idea3" class="inputBoder" />
+
+          <input
+            type="button"
+            onclick="send(this.form)"
+            value="Ready To Get BaekJoon"
+            class="btnBlueGreen"
+          />
+        </form>
+        <hr />
+        <div class="result">
+          <div class="result_sub">RESULT</div>
+          <div class="result_box">
+            <button onclick="copy_to_clipboard()" class="copy">
+              COPY
+              <!-- <img
             src="https://blog.kakaocdn.net/dn/N1wUc/btqIl7XZtKM/b44qX9Six1vczz2ISWj4LK/img.png"
             alt="복사하기"
           /> -->
-          </button>
-          <div class="result_board" id="myInput"></div>
+            </button>
+            <div class="result_board" id="myInput"></div>
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
 
-    <footer></footer>
+      <footer></footer>
+    </div>
   </body>
 </html>
 
