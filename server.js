@@ -104,7 +104,7 @@ app.post("/search", async (req, res) => {
         return res.status(200).json({
             form: message
         })
-    },500);
+    },1000);
 });
 
 app.listen(port, () => {
