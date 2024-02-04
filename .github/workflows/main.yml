@@ -18,5 +18,5 @@ jobs:
         script: |
             cd ${{ secrets.PWD }}
             sudo su
-            git pull https://github.com/sw0501/SSAFY-Homework-Form.git
+            git pull
             pm2 reload SSAFY
