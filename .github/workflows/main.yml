@@ -17,6 +17,5 @@ jobs:
         port: 22
         script: |
             cd ${{ secrets.PWD }}
-            sudo su
             git pull
             pm2 reload 0
