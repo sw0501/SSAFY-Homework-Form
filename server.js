@@ -1,9 +1,16 @@
 const client = require("cheerio-httpcli");
 const express = require("express");
 const app = express();
-const port = 80;
+const port = 443;
 const bodyParser = require("body-parser");
 const request = require("request");
+const https = require("https");
+const fs = require("fs");
+
+const options = {
+    key: fs.readFileSync("./KEY/private.pem"),
+    cert: fs.readFileSync("./KEY/public.pem"),
+};
 
 app.use(bodyParser.json());
 app.use(express.static(__dirname + "/Front"));
@@ -110,6 +117,6 @@ app.get("/search", async (req, res) => {
     }, 500);
 });
 
-app.listen(port, () => {
+https.createServer(options, app).listen(port, () => {
     console.log(`server is listening at localhost:${port}`);
 });
