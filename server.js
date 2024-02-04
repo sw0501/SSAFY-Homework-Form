@@ -63,7 +63,7 @@ app.get("/search", async (req, res) => {
         });
     }
 
-    function careerRefresh() {
+    function getUserInfo() {
         return new Promise((res, rej) => {
             //사용자 해결 여부 가져오기
             const userUrl = "https://acmicpc.net/status";
@@ -84,37 +84,42 @@ app.get("/search", async (req, res) => {
 
     await getProblemInfo();
 
-    await careerRefresh().then((url) => {
+    await getUserInfo().then((url) => {
         const param = {};
-        client.fetch(url, param, function (err, $, res) {
-            if (err) {
-                console.log(err);
-                return;
-            }
+        const func = () => {
+            return new Promise((res, rej) => {
+                client.fetch(url, param, function (err, $) {
+                    if (err) {
+                        console.log(err);
+                        return;
+                    }
 
-            const memory = $("#status-table > tbody > tr:first-child > .memory").text();
-            const time = $("#status-table > tbody > tr:first-child > .time").text();
+                    const memory = $("#status-table > tbody > tr:first-child > .memory").text();
+                    const time = $("#status-table > tbody > tr:first-child > .time").text();
 
-            message += "메모리: ```" + Number.parseInt(memory).toLocaleString("ko-KR") + "kb```<br>";
-            message += "실행 시간: ```" + Number.parseInt(time).toLocaleString("ko-KR") + "ms```<br>";
+                    message += "메모리: ```" + Number.parseInt(memory).toLocaleString("ko-KR") + "kb```<br>";
+                    message += "실행 시간: ```" + Number.parseInt(time).toLocaleString("ko-KR") + "ms```<br>";
 
-            if (idea1 !== "") {
-                message += "- " + idea1 + "<br>";
-            }
-            if (idea2 !== "") {
-                message += "- " + idea2 + "<br>";
-            }
-            if (idea3 !== "") {
-                message += "- " + idea3 + "<br>";
-            }
+                    if (idea1 !== "") {
+                        message += "- " + idea1 + "<br>";
+                    }
+                    if (idea2 !== "") {
+                        message += "- " + idea2 + "<br>";
+                    }
+                    if (idea3 !== "") {
+                        message += "- " + idea3 + "<br>";
+                    }
+
+                    res(message);
+                });
+            });
+        };
+        func().then((message) => {
+            return res.status(200).json({
+                form: message,
+            });
         });
     });
-
-    setTimeout(() => {
-        return res.status(200).json({
-            form: message,
-        });
-    }, 500);
 });
 
 https.createServer(options, app).listen(port, () => {
