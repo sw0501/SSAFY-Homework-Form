@@ -10,7 +10,7 @@ const fs = require("fs");
 const fetchInfo = require("./middleware/fetchInfo");
 
 const corsOptions = {
-    origin: ["https://www.ssafy-hw.site", "https://ssafy-hw.site", "null", "https://localhost:443"],
+    origin: ["https://34.127.90.191:3000", "https://www.ssafy-hw.site", "https://ssafy-hw.site", "null", "https://localhost:443"],
     credentials: true,
 };
 
