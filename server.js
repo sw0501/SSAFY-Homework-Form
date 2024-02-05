@@ -1,11 +1,11 @@
 const client = require("cheerio-httpcli");
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const port = 3000;
-const cors = require("cors");
 
 const corsOptions = {
-    origin: ["*", "https://34.127.90.191:3000", "https://www.ssafy-hw.site/", "https://ssafy-hw.site/", "null", "https://localhost:443"],
+    origin: ["https://www.ssafy-hw.site", "https://ssafy-hw.site", "https://34.127.90.191:443"],
 };
 
 app.use(cors(corsOptions));
