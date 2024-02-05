@@ -9,8 +9,8 @@ const fs = require("fs");
 const fetchInfo = require("./middleware/fetchInfo");
 
 const options = {
-    key: fs.readFileSync("./KEY/private.pem"),
-    cert: fs.readFileSync("./KEY/public.pem"),
+    key: fs.readFileSync("./KEY/cert.key"),
+    cert: fs.readFileSync("./KEY/cert.crt"),
 };
 
 app.use(bodyParser.json());
