@@ -91,35 +91,46 @@ app.get("/search", fetchInfo, async (req, res) => {
             return new Promise((res, rej) => {
                 client.fetch(url, param, function (err, $) {
                     if (err) {
-                        console.log(err);
-                        return;
+                        rej(err);
                     }
 
                     const memory = $("#status-table > tbody > tr:first-child > .memory").text();
                     const time = $("#status-table > tbody > tr:first-child > .time").text();
 
+                    if (memory === "" && time === "") {
+                        return rej(new Error("User Not Solved Problem"));
+                    }
+
                     message += "메모리: ```" + Number.parseInt(memory).toLocaleString("ko-KR") + "kb```<br>";
                     message += "실행 시간: ```" + Number.parseInt(time).toLocaleString("ko-KR") + "ms```<br>";
+                    message += "아이디어: <br>";
 
                     if (idea1 !== "") {
-                        message += "- " + idea1 + "<br>";
+                        message += "- " + idea1.toString() + "<br>";
                     }
                     if (idea2 !== "") {
-                        message += "- " + idea2 + "<br>";
+                        message += "- " + idea2.toString() + "<br>";
                     }
                     if (idea3 !== "") {
-                        message += "- " + idea3 + "<br>";
+                        message += "- " + idea3.toString() + "<br>";
                     }
 
-                    res(message);
+                    return res(message);
                 });
             });
         };
-        func().then((message) => {
-            return res.status(200).json({
-                form: message,
+        func()
+            .then((message) => {
+                return res.status(200).json({
+                    form: message,
+                });
+            })
+            .catch((error) => {
+                return res.status(400).json({
+                    Error: error,
+                    form: error.toString(),
+                });
             });
-        });
     });
 });
 
