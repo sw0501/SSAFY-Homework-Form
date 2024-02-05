@@ -25,15 +25,12 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + "/Front"));
 
 app.get("/", (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
     return res.status(200).json({
         success: true,
     });
 });
 
 app.get("/search", fetchInfo, async (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
-
     const userId = req.query.userId;
     const problemId = req.query.problemId;
     const idea1 = req.query.idea1;
