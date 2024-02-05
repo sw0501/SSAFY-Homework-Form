@@ -5,10 +5,10 @@ const app = express();
 const port = 3000;
 
 const corsOptions = {
-    origin: ["https://www.ssafy-hw.site", "https://ssafy-hw.site", "https://34.127.90.191:443"],
+    origin: ["https://www.ssafy-hw.site", "https://ssafy-hw.site", "https://34.127.90.191:443", "https://ssafy-hw.site"],
 };
 
-app.use(cors(corsOptions));
+app.use(cors());
 
 const bodyParser = require("body-parser");
 const request = require("request");
