@@ -3,23 +3,25 @@ const express = require("express");
 const app = express();
 const port = 3000;
 const cors = require("cors");
+
+const corsOptions = {
+    origin: ["*", "https://34.127.90.191:3000", "https://www.ssafy-hw.site", "https://ssafy-hw.site", "null", "https://localhost:443"],
+    credentials: true,
+};
+
+app.use(cors(corsOptions));
+
 const bodyParser = require("body-parser");
 const request = require("request");
 const https = require("https");
 const fs = require("fs");
 const fetchInfo = require("./middleware/fetchInfo");
 
-const corsOptions = {
-    origin: ["https://34.127.90.191:3000", "https://www.ssafy-hw.site", "https://ssafy-hw.site", "null", "https://localhost:443", "*"],
-    credentials: true,
-};
-
 const options = {
     key: fs.readFileSync("./KEY/cert.key"),
     cert: fs.readFileSync("./KEY/cert.crt"),
 };
 
-app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + "/Front"));
 
@@ -32,6 +34,7 @@ app.get("/", (req, res) => {
 
 app.get("/search", fetchInfo, async (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
+
     const userId = req.query.userId;
     const problemId = req.query.problemId;
     const idea1 = req.query.idea1;
