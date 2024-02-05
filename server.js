@@ -5,8 +5,7 @@ const port = 3000;
 const cors = require("cors");
 
 const corsOptions = {
-    origin: ["*", "https://34.127.90.191:3000", "https://www.ssafy-hw.site", "https://ssafy-hw.site", "null", "https://localhost:443"],
-    credentials: true,
+    origin: ["*", "https://34.127.90.191:3000", "https://www.ssafy-hw.site/", "https://ssafy-hw.site/", "null", "https://localhost:443"],
 };
 
 app.use(cors(corsOptions));
