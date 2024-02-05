@@ -2,17 +2,24 @@ const client = require("cheerio-httpcli");
 const express = require("express");
 const app = express();
 const port = 3000;
+const cors = require("cors");
 const bodyParser = require("body-parser");
 const request = require("request");
 const https = require("https");
 const fs = require("fs");
 const fetchInfo = require("./middleware/fetchInfo");
 
+const corsOptions = {
+    origin: ["https://www.ssafy-hw.site", "https://ssafy-hw.site", "null", "https://localhost:443"],
+    credentials: true,
+};
+
 const options = {
     key: fs.readFileSync("./KEY/cert.key"),
     cert: fs.readFileSync("./KEY/cert.crt"),
 };
 
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + "/Front"));
 
