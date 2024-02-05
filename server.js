@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const request = require("request");
 const https = require("https");
 const fs = require("fs");
+const fetchInfo = require("./middleware/fetchInfo");
 
 const options = {
     key: fs.readFileSync("./KEY/private.pem"),
@@ -22,7 +23,7 @@ app.get("/", (req, res) => {
     });
 });
 
-app.get("/search", async (req, res) => {
+app.get("/search", fetchInfo, async (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     const userId = req.query.userId;
     const problemId = req.query.problemId;
