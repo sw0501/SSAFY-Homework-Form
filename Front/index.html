@@ -179,6 +179,8 @@
 </html>
 
 <script>
+  getLocalStroage();
+
   function copy_to_clipboard() {
     var copyText = document.getElementById("myInput");
     console.log(copyText.innerText);
@@ -192,8 +194,25 @@
       });
   }
 
-  function send(f) {
+  function getLocalStroage() {
+    if (!localStorage.getItem("baekId")) {
+      localStorage.setItem("baekId", document.getElementById("baekId").value);
+      console.log(document.getElementById("baekId").value);
+    } else {
+      var name = localStorage.getItem("baekId");
+      document.getElementById("baekId").value = name;
+    }
+  }
 
+  function check(name) {
+    if (name != localStorage.getItem("baekId")) {
+      console.log("isWrong");
+      localStorage.setItem("baekId", name);
+    }
+  }
+
+  function send(f) {
+    check(f.baekId.value);
     var xhr = new XMLHttpRequest();
     xhr.withCredentials = true;
 
