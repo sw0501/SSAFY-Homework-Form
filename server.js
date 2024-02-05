@@ -1,7 +1,7 @@
 const client = require("cheerio-httpcli");
 const express = require("express");
 const app = express();
-const port = 443;
+const port = 3000;
 const bodyParser = require("body-parser");
 const request = require("request");
 const https = require("https");
@@ -9,8 +9,8 @@ const fs = require("fs");
 const fetchInfo = require("./middleware/fetchInfo");
 
 const options = {
-    key: fs.readFileSync("./KEY/cert.key"),
-    cert: fs.readFileSync("./KEY/cert.crt"),
+    key: fs.readFileSync("./KEY/private.pem"),
+    cert: fs.readFileSync("./KEY/public.pem"),
 };
 
 app.use(bodyParser.json());
