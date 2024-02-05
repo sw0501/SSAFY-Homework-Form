@@ -5,7 +5,7 @@ const app = express();
 const port = 3000;
 
 const corsOptions = {
-    origin: ["https://www.ssafy-hw.site", "https://ssafy-hw.site", "https://34.127.90.191:443", "https://ssafy-hw.site"],
+    origin: ["https://www.ssafy-hw.site", "https://ssafy-hw.site", "https://34.127.90.191:443", "https://ssafy-hw.site", "https://localhost:3000"],
 };
 
 app.use(cors());
