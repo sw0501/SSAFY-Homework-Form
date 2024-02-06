@@ -140,6 +140,47 @@ app.get("/search", fetchInfo, async (req, res) => {
     });
 });
 
+app.get("/title/:problemId", async (req, res) => {
+    const problemId = req.params.problemId;
+
+    const today = new Date();
+
+    let message = "## ";
+
+    message += ("00" + (today.getMonth() + 1)).slice(-2);
+    message += ("00" + today.getDate()).slice(-2);
+    message += " BOJ " + problemId + " ";
+
+    function getProblemInfo() {
+        return new Promise((res, rej) => {
+            //문제 태그 정보 가져오기
+            const solvedUrl = "https://solved.ac/api/v3/problem/show";
+            let queryParams = "?" + encodeURIComponent("problemId") + "=" + problemId;
+
+            request(
+                {
+                    url: solvedUrl + queryParams,
+                    method: "GET",
+                },
+                function (error, response, body) {
+                    const probelmInfo = JSON.parse(body);
+                    message += probelmInfo.titleKo + "  ";
+                    message += "[https://www.acmicpc.net/problem/" + problemId + "]";
+                    message += "(https://www.acmicpc.net/problem/" + problemId + ")";
+
+                    res();
+                }
+            );
+        });
+    }
+
+    await getProblemInfo();
+
+    return res.status(200).json({
+        title: message,
+    });
+});
+
 https.createServer(options, app).listen(port, () => {
     console.log(`server is listening at localhost:${port}`);
 });
