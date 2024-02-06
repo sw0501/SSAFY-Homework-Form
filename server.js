@@ -52,7 +52,7 @@ app.get("/search", fetchInfo, async (req, res) => {
                 },
                 function (error, response, body) {
                     const probelmInfo = JSON.parse(body);
-                    message += "### BOJ " + probelmInfo.problemId + " " + probelmInfo.titleKo + "<br>";
+                    message += "#### BOJ " + probelmInfo.problemId + " " + probelmInfo.titleKo + "<br>";
                     message += "태그 : ";
 
                     for (let i = 0; i < probelmInfo.tags.length; i++) {
