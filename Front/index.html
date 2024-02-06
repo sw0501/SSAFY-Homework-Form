@@ -214,7 +214,7 @@
   function send(f) {
     check(f.baekId.value);
     var xhr = new XMLHttpRequest();
-    xhr.withCredentials = true;
+    //xhr.withCredentials = true;
 
     xhr.addEventListener("readystatechange", function () {
       if (this.readyState === 4) {
