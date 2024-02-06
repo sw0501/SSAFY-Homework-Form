@@ -166,7 +166,7 @@
         <div class="result">
           <div class="result_sub">RESULT</div>
           <div class="result_box">
-            <button onclick="copy_to_clipboard()" class="copy">
+            <button onclick="copy_to_clipboard()" class="copy" id="copy">
               COPY
               <!-- <img
             src="https://blog.kakaocdn.net/dn/N1wUc/btqIl7XZtKM/b44qX9Six1vczz2ISWj4LK/img.png"
@@ -192,7 +192,8 @@
     navigator.clipboard
       .writeText(copyText.innerText)
       .then(() => {
-        alert("Success: " + copyText.innerText);
+        //alert("Success: " + copyText.innerText);
+        document.getElementById("copy").innerText = "✔";
       })
       .catch((err) => {
         console.error("copy failed");
@@ -239,5 +240,9 @@
     xhr.open("GET", url + queryString);
 
     xhr.send();
+
+    if (document.getElementById("copy").innerText == "✔") {
+      document.getElementById("copy").innerText = "COPY";
+    }
   }
 </script>
