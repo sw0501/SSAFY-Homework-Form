@@ -13,4 +13,10 @@
 ## 화면 예시
 
 <div>
+    <h3>기본 메인 화면</h3>
+    <img src = "https://github.com/sw0501/SSAFY-Homework-Form/blob/main/Image/main.PNG?raw=true" width="400">
+    <h3>정보 입력 화면</h3>
+    <img src = "https://github.com/sw0501/SSAFY-Homework-Form/blob/main/Image/result.PNG?raw=true" width="400">
+    <h3>markdwon 결과</h3>
+    <img src = "https://github.com/sw0501/SSAFY-Homework-Form/blob/main/Image/markdown.PNG?raw=true" width="350">
 </div>
