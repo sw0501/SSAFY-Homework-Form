@@ -144,6 +144,7 @@ app.get("/title", async (req, res) => {
     res.sendFile(__dirname + "/Front/title.html");});
 
 app.get("/title/:problemId", async (req, res) => {
+    
     const problemId = req.params.problemId;
 
     const today = new Date();
@@ -167,7 +168,7 @@ app.get("/title/:problemId", async (req, res) => {
                 },
                 function (error, response, body) {
                     const probelmInfo = JSON.parse(body);
-                    message += probelmInfo.titleKo + "  ";
+                    message += probelmInfo.titleKo + "<br>";
                     message += "[https://www.acmicpc.net/problem/" + problemId + "]";
                     message += "(https://www.acmicpc.net/problem/" + problemId + ")";
 
