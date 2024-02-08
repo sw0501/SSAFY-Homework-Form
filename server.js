@@ -140,6 +140,9 @@ app.get("/search", fetchInfo, async (req, res) => {
     });
 });
 
+app.get("/title", async (req, res) => {
+    res.sendFile(__dirname + "/Front/title.html");});
+
 app.get("/title/:problemId", async (req, res) => {
     const problemId = req.params.problemId;
 

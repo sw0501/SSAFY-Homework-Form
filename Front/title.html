@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://avatars.githubusercontent.com/u/84579378?s=200&v=4"
+      rel="shortcut icon"
+      type="image/x-icon"
+    />
+    <title>ssafy-hw</title>
+    <style>
+      body {
+        margin-left: 20%;
+        margin-right: 20%;
+        background-color: #f9f9f9;
+      }
+
+      header .title {
+        padding: 20px;
+        font-size: 2rem;
+        font-weight: 800;
+      }
+
+      .main {
+        justify-content: center;
+        width: 100%;
+      }
+
+      .main .form {
+        margin-left: 10%;
+        margin-right: 10%;
+        margin-top: 30px;
+        width: 80%;
+      }
+
+      .main {
+        display: block;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .main .form label {
+        color: #5c5c5c;
+        font-size: 1.1rem;
+        font-weight: 500;
+      }
+
+      .btnBlueGreen {
+        font-size: 1.2rem;
+        color: #fff;
+        background: #00ae68;
+        border: 1px solid #fff;
+        margin-bottom: 30px;
+      }
+
+      .btnBlueGreen:hover {
+        background: #21825b;
+      }
+
+      .inputBoder {
+        border: 1px solid #ccc;
+      }
+
+      .main .form input {
+        width: 100%;
+        /*입력 칸 (input field) 의 폭을 지정하기 위해, 폭 속성 (width property) 를 사용하였습니다.*/
+        padding: 12px 20px;
+        margin: 8px 0 20px 0;
+        display: inline-block;
+        /* border: 1px solid #ccc; */
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+
+      .main .result .result_box .copy {
+        float: right;
+        width: 65px;
+        background-color: #5c5c5c;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        padding: 5px;
+      }
+
+      .main .result .result_sub {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin: 20px 20px 0 20px;
+      }
+
+      .main .result .result_box {
+        /* border: 1px solid #ccc; */
+        width: 80%;
+        margin-left: 10%;
+        margin-right: 10%;
+        display: inline-block;
+      }
+
+      .main .result .result_box .result_board {
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-top: 30px;
+        height: 300px;
+        padding: 20px;
+        font-size: 1rem;
+      }
+
+      footer {
+        height: 100px;
+      }
+
+      hr {
+        background: #f9f9f9;
+        height: 1px;
+        border: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div style="background-color: #fff; top: -10px">
+      <header>
+        <div class="title">SSAFY 11th <br />Homework Title Form Creator</div>
+      </header>
+
+      <hr />
+
+      <main class="main">
+        <form action="" class="form">
+          <label for="baekId">BaekJoon ID</label>
+          <input
+            type="text"
+            id="baekId"
+            name="baekId"
+            placeholder="userId"
+            size="30"
+            class="inputBoder"
+          />
+
+          <label for="baekNum">BaekJoon Solved Number</label>
+          <input
+            type="text"
+            id="baekNum"
+            name="baekNum"
+            placeholder="1234"
+            size="30"
+            class="inputBoder"
+          />
+
+          <label for="idea1">Idea 1</label>
+          <input type="text" id="idea1" name="idea1" class="inputBoder" />
+          <label for="idea2">Idea 2</label>
+          <input type="text" id="idea2" name="idea2" class="inputBoder" />
+          <label for="idea3">Idea 3</label>
+          <input type="text" id="idea3" name="idea3" class="inputBoder" />
+
+          <input
+            type="button"
+            onclick="send(this.form)"
+            value="Ready To Get BaekJoon"
+            class="btnBlueGreen"
+          />
+        </form>
+        <hr />
+        <div class="result">
+          <div class="result_sub">RESULT</div>
+          <div class="result_box">
+            <button onclick="copy_to_clipboard()" class="copy" id="copy">
+              COPY
+              <!-- <img
+            src="https://blog.kakaocdn.net/dn/N1wUc/btqIl7XZtKM/b44qX9Six1vczz2ISWj4LK/img.png"
+            alt="복사하기"
+          /> -->
+            </button>
+            <div class="result_board" id="myInput"></div>
+          </div>
+        </div>
+      </main>
+
+      <footer></footer>
+    </div>
+  </body>
+</html>
+
+<script>
+  getLocalStroage();
+
+  function copy_to_clipboard() {
+    var copyText = document.getElementById("myInput");
+    console.log(copyText.innerText);
+    navigator.clipboard
+      .writeText(copyText.innerText)
+      .then(() => {
+        //alert("Success: " + copyText.innerText);
+        document.getElementById("copy").innerText = "✔";
+      })
+      .catch((err) => {
+        console.error("copy failed");
+      });
+  }
+
+  function getLocalStroage() {
+    if (!localStorage.getItem("baekId")) {
+      localStorage.setItem("baekId", document.getElementById("baekId").value);
+      console.log(document.getElementById("baekId").value);
+    } else {
+      var name = localStorage.getItem("baekId");
+      document.getElementById("baekId").value = name;
+    }
+  }
+
+  function check(name) {
+    if (name != localStorage.getItem("baekId")) {
+      console.log("isWrong");
+      localStorage.setItem("baekId", name);
+    }
+  }
+
+  function send(f) {
+    check(f.baekId.value);
+    var xhr = new XMLHttpRequest();
+    //xhr.withCredentials = true;
+
+    xhr.addEventListener("readystatechange", function () {
+      if (this.readyState === 4) {
+        const message = JSON.parse(this.responseText).form;
+
+        document.getElementById("myInput").innerHTML = message;
+      }
+    });
+
+    const url = "https://ssafy-hw.site:443/search";
+    let queryString = "?userId=" + f.baekId.value;
+    queryString += "&problemId=" + f.baekNum.value;
+    queryString += "&idea1=" + f.idea1.value;
+    queryString += "&idea2=" + f.idea2.value;
+    queryString += "&idea3=" + f.idea3.value;
+
+    xhr.open("GET", url + queryString);
+
+    xhr.send();
+
+    if (document.getElementById("copy").innerText == "✔") {
+      document.getElementById("copy").innerText = "COPY";
+    }
+  }
+</script>
