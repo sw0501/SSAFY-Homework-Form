@@ -165,7 +165,6 @@
 </html>
 
 <script>
-  getLocalStroage();
 
   function copy_to_clipboard() {
     var copyText = document.getElementById("myInput");
@@ -181,42 +180,20 @@
       });
   }
 
-  function getLocalStroage() {
-    if (!localStorage.getItem("baekId")) {
-      localStorage.setItem("baekId", document.getElementById("baekId").value);
-      console.log(document.getElementById("baekId").value);
-    } else {
-      var name = localStorage.getItem("baekId");
-      document.getElementById("baekId").value = name;
-    }
-  }
-
-  function check(name) {
-    if (name != localStorage.getItem("baekId")) {
-      console.log("isWrong");
-      localStorage.setItem("baekId", name);
-    }
-  }
-
   function send(f) {
-    check(f.baekId.value);
     var xhr = new XMLHttpRequest();
     //xhr.withCredentials = true;
 
     xhr.addEventListener("readystatechange", function () {
       if (this.readyState === 4) {
-        const message = JSON.parse(this.responseText).form;
+        const message = JSON.parse(this.responseText).title;
 
         document.getElementById("myInput").innerHTML = message;
       }
     });
 
-    const url = "https://ssafy-hw.site:443/search";
-    let queryString = "?userId=" + f.baekId.value;
-    queryString += "&problemId=" + f.baekNum.value;
-    queryString += "&idea1=" + f.idea1.value;
-    queryString += "&idea2=" + f.idea2.value;
-    queryString += "&idea3=" + f.idea3.value;
+    const url = "https://localhost:443/title";
+    queryString = "/" + f.baekNum.value;
 
     xhr.open("GET", url + queryString);
 
