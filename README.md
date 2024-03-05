@@ -2,6 +2,11 @@
 
 ### Site: https://ssafy-hw.site
 
+|  이름  |   담당   |                                                                               Github                                                                               |
+| :----: | :------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| 고다현 | Frontend | <a href="https://github.com/dahyunko" target="_blank"><img src="https://img.shields.io/badge/dahyunko-181717?style=flat-square&logo=github&logoColor=white"/> </a> |
+| 박상욱 | Backend  |   <a href="https://github.com/sw0501" target="_blank"><img src="https://img.shields.io/badge/sw0501-181717?style=flat-square&logo=github&logoColor=white"/> </a>   |
+
 ## Tech-Stack
 
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
@@ -10,6 +15,7 @@
 ![Node.js](https://img.shields.io/badge/Node.js-339933.svg?&style=for-the-badge&logo=Node.js&logoColor=white)
 ![Google Cloud](https://img.shields.io/badge/GoogleCloud-%234285F4.svg?style=for-the-badge&logo=google-cloud&logoColor=white)
 
+<hr>
 ## 화면 예시
 
 <div>
