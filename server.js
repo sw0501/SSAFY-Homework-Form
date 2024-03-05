@@ -100,8 +100,9 @@ app.get("/search", fetchInfo, async (req, res) => {
                         rej(err);
                     }
 
-                    const memory = $("#status-table > tbody > tr:first-child > .memory").text();
-                    const time = $("#status-table > tbody > tr:first-child > .time").text();
+                    // const memory = $("#status-table > tbody > tr:first-child > .memory").text();
+                    const memory = $(".memory")[0].text();
+                    const time = $(".time")[0].text();
 
                     if (memory === "" && time === "") {
                         return rej(new Error("User Not Solved Problem"));
