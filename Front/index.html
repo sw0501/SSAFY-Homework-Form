@@ -115,6 +115,29 @@
         height: 1px;
         border: 0;
       }
+
+      .spinner {
+        border: 8px solid #f3f3f3;
+        border-top: 8px solid #3498db;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 2s linear infinite;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        margin-left: -20px;
+        margin-top: -20px;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
     </style>
   </head>
 
@@ -173,9 +196,10 @@
             alt="복사하기"
           /> -->
             </button>
-            <div class="result_board" id="myInput"></div>
+            <div class="result_board" tabindex="0" id="myInput"></div>
           </div>
         </div>
+        <div id="spinner" class="spinner" style="display: none"></div>
       </main>
 
       <footer></footer>
@@ -222,11 +246,19 @@
     var xhr = new XMLHttpRequest();
     //xhr.withCredentials = true;
 
+    // 로딩 스피너 표시
+    document.getElementById("spinner").style.display = "block";
+
     xhr.addEventListener("readystatechange", function () {
       if (this.readyState === 4) {
+        // 로딩 스피너 숨기기
+        document.getElementById("spinner").style.display = "none";
+
         const message = JSON.parse(this.responseText).form;
 
         document.getElementById("myInput").innerHTML = message;
+        // 포커스 맞추기
+        document.getElementById("myInput").focus();
       }
     });
 
