@@ -4,8 +4,8 @@ const cors = require("cors");
 const app = express();
 const axios = require("axios");
 
-// const port = 443;
-const port = 3000;
+const port = 443;
+// const port = 3000;
 
 const corsOptions = {
   origin: "*",
@@ -210,10 +210,10 @@ app.get("/title/:problemId", async (req, res) => {
   });
 });
 
-// https.createServer(options, app).listen(port, () => {
-//     console.log(`server is listening at localhost:${port}`);
-// });
-
-app.listen(port, () => {
-  console.log(`Server is listening at http://localhost:${port}`); // http server for test  });
+https.createServer(options, app).listen(port, () => {
+    console.log(`server is listening at localhost:${port}`);
 });
+
+// app.listen(port, () => {
+//   console.log(`Server is listening at http://localhost:${port}`); // http server for test  });
+// });
