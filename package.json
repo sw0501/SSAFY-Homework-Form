@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/sw0501/SSAFY-Homework-Form#readme",
   "dependencies": {
+    "axios": "^1.7.4",
     "body-parser": "^1.20.2",
     "cheerio-httpcli": "^0.8.3",
     "cors": "^2.8.5",
