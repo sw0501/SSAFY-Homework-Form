@@ -33,7 +33,7 @@ app.get("/", (req, res) => {
   });
 });
 
-app.get("/search"/*, fetchInfo*/, async (req, res) => {
+app.get("/search" /*, fetchInfo*/, async (req, res) => {
   const userId = req.query.userId;
   const problemId = req.query.problemId;
   const idea1 = req.query.idea1;
@@ -57,8 +57,8 @@ app.get("/search"/*, fetchInfo*/, async (req, res) => {
 
       axios
         .request(config)
-          .then((response) => {
-              console.log(response.data);
+        .then((response) => {
+          // console.log(response.data);
           const data = response.data;
           message += "#### BOJ " + data.problemId + " " + data.titleKo + "<br>";
           message += "태그 : ";
@@ -111,10 +111,17 @@ app.get("/search"/*, fetchInfo*/, async (req, res) => {
             rej(err);
           }
 
-            console.log($.html())
+          //console.log($.html());
           // const memory = $("#status-table > tbody > tr:first-child > .memory").text();
-          const memory = $(".memory")[0].text();
-          const time = $(".time")[0].text();
+          const memoryElement = $(".memory")[0].children[0];
+          const timeElement = $(".time")[0].children[0];
+
+          if (!memoryElement || !timeElement) {
+            return rej(new Error("User Not Solved Problem or elements not found"));
+          }
+          
+          const memory = memoryElement.data;
+          const time = timeElement.data;
 
           if (memory === "" && time === "") {
             return rej(new Error("User Not Solved Problem"));
@@ -208,5 +215,5 @@ app.get("/title/:problemId", async (req, res) => {
 // });
 
 app.listen(port, () => {
-  console.log(`Server is listening at http://localhost:${port}`); // http server for test  });  // https server for production  });  // http server for test  });  // https server for production  });  // http server for test  });  // https server for production  });  // http server for test  });  // https server for production  });  // http server for test  });  // https server for production  });  // http server for test  });  // https server for production  });  // http server for test  });  // https server for production  });  // http server for test  });  // https server for production  });  // http server for test  });  // https server for production  });  // http server for test  });  // https server for production  });  // http server for test  });  // https server for production  });  // http server for test  });  //
+  console.log(`Server is listening at http://localhost:${port}`); // http server for test  });
 });
